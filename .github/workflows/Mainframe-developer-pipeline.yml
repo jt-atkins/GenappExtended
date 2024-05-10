@@ -14,6 +14,7 @@ env:
     MyApplication: cics-genapp #application folder name under the working tree in the application Git repo
     Clone: /u/DMJTA1/zAppBuild/scripts/git-clone-ssh.sh
     DBB_Build: /u/DMJTA1/zAppBuild/scripts/dbb-build.sh
+    Print: /u/DMJTA1/zAppBuild/scripts/print.sh
     UCD_Package: /u/DMJTA1/zAppBuild/scripts/PublishUCD.sh
     UCD_Deploy: /u/DMJTA1/zAppBuild/scripts/DeployUCD.sh
     UCD_Server_URL: https://9.76.61.225:8443
@@ -158,12 +159,15 @@ jobs:
         run: ${{ env.DBB_Host }} ${{ env.DBB_Build }} ${{ env.MyWorkDir }} ${{ env.MyWorkSpace }}/${{ env.AppName }} ${{ env.MyApplication }} ${{ env.MyHlq }}.${{ steps.hlq.outputs.substring }} -i  -b origin/GENAP-SCENARIO-3
         shell: cmd 
 
-
-
       - name: Release Maintenance DBB Impact Build Based on Previous Main Tag
         if: startsWith(steps.getBranch.outputs.value, 'hotfix')
    #     run: ${{ env.DBB_Host }} ${{ env.DBB_Build }} ${{ env.MyWorkDir }} ${{ env.MyWorkSpace }}/${{ env.AppName }} ${{ env.MyApplication }} ${{ env.MyHlq }}.${{ steps.hlq.outputs.substring }} --impactBuild --verbose ${{ env.MyWorkSpace }}/${{ env.AppName }}:${{ steps.readfile.outputs.tag }}
         run: ${{ env.DBB_Host }} ${{ env.DBB_Build }} ${{ env.MyWorkDir }} ${{ env.MyWorkSpace }}/${{ env.AppName }} ${{ env.MyApplication }} ${{ env.MyHlq }} -i  -b origin/${{ steps.readfile.outputs.tag }}        
+        shell: cmd 
+
+      - name: Print Compiler Listing
+        if: startsWith(steps.getBranch.outputs.value, 'GENAP')
+        run: ${{ env.DBB_Host }} ${{ env.Print }} ${{ env.MyWorkSpace }}/${{ env.AppName }}/work 
         shell: cmd 
 
       - name: Package for Dev
