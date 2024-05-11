@@ -13,7 +13,7 @@
       * CONTRACT WITH IBM CORPORATION                                  *
       *                                                                *
       *                                                                *
-      *                    ADD Customer.                               *
+      *                    ADD Customer                                *
       *                                                                *
       *   Business logic for adding a new customer.                    *
       *                                                                *
