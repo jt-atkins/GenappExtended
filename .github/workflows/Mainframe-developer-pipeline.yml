@@ -33,15 +33,19 @@ env:
 
 concurrency:
     group: Dev-Build
+
 on:
-  push:
-    branches:
-      - "GENAP**"
-      - "hotfix**"
-    paths:
-      - "**.cbl"
-      - "**.bms"
-      - "**.cpy"
+   workflow_dispatch:
+       
+#on:
+#  push:
+#    branches:
+#      - "GENAP**"
+#      - "hotfix**"
+#    paths:
+#      - "**.cbl"
+#      - "**.bms"
+#      - "**.cpy"
       
 jobs:
   Dev-Build:
