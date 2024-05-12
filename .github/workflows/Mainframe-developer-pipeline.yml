@@ -168,10 +168,10 @@ jobs:
         run: ${{ env.DBB_Host }} ${{ env.DBB_Build }} ${{ env.MyWorkDir }} ${{ env.MyWorkSpace }}/${{ env.AppName }} ${{ env.MyApplication }} ${{ env.MyHlq }} -i  -b origin/${{ steps.readfile.outputs.tag }}        
         shell: cmd 
 
-      - name: Print Compiler Listing
-        if: steps.dbb-build.outcome == 'failure' && startsWith(github.ref, 'refs/heads/GENAP')  # Conditional based on the outcome of dbb-build
-        run: ${{ env.DBB_Host }} ${{ env.Print }} ${{ env.MyWorkSpace }}/${{ env.AppName }}/work 
-        shell: cmd 
+   #   - name: Print Compiler Listing
+   #     if: steps.dbb-build.outcome == 'failure' && startsWith(github.ref, 'refs/heads/GENAP')  # Conditional based on the outcome of dbb-build
+   #     run: ${{ env.DBB_Host }} ${{ env.Print }} ${{ env.MyWorkSpace }}/${{ env.AppName }}/work 
+   #     shell: cmd 
 
       - name: Package for Dev
         if: startsWith(steps.getBranch.outputs.value, 'GENAP')
