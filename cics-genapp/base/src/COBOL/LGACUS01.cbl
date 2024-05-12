@@ -1,8 +1,8 @@
       ******************************************************************
       *                                                                *
-      * LICENSED MATERIALS - PROPERTY OF IBM                          **
+      * LICENSED MATERIALS - PROPERTY OF IBM.                          *
       *                                                                *
-      * "RESTRICTED MATERIALS OF IBM"                                  *
+      * "RESTRICTED MATERIALS OF IBM".                                 *
       *                                                                *
       * CB12                                                           *
       *                                                                *
@@ -13,7 +13,7 @@
       * CONTRACT WITH IBM CORPORATION                                  *
       *                                                                *
       *                                                                *
-      *                    ADD Customer.                               *
+      *                    ADD Customer                                *
       *                                                                *
       *   Business logic for adding a new customer.                    *
       *                                                                *
@@ -201,7 +201,7 @@
       * COBOL / Java  switch                                           *
 
            PERFORM CHECK-FIRST-JAVA.
-      *    PERFORM CHECK-FIRST-COBOL.
+      *     PERFORM CHECK-FIRST-COBOL.
        CHECK-FIRST-EXIT.
            EXIT.
 

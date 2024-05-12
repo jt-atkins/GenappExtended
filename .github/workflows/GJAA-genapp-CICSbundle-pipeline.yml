@@ -1,13 +1,13 @@
 name: Java-z-Build
 env:
-    AppName: GenappML2
+    AppName: GenappExtended
     DBB_Host: '"C:\Program Files\PuTTY\plink.exe" DMJTA1@WTSC47.CPOLAB.IBM.COM -pw ${{ secrets.WTSC47_PW }}'
     MyRepo: git@github.com:${{ github.repository }}.git
     MyBranch: ${{ github.ref }}
     # MyWorkDir: /u/DMJTA1/zAppBuild/javabuild/Genapp_run_${{ github.run_number }}    
     MyWorkDir: /u/DMJTA1/zAppBuild/javabuild
     
-    # MyWorkSpace: /u/DMJTA1/zAppBuild/featurebuild/Genapp_run_${{ github.run_number }}/GenappML2
+    # MyWorkSpace: /u/DMJTA1/zAppBuild/featurebuild/Genapp_run_${{ github.run_number }}/GenappExtended
     MyWorkSpace: /u/DMJTA1/zAppBuild/javabuild/Genapp_run_${{ github.run_number }}
     MyApplication: cics-genapp #application folder name under the working tree in the application Git repo
     Clone: /u/DMJTA1/zAppBuild/scripts/git-clone-ssh.sh
@@ -27,7 +27,7 @@ env:
     ShipGen: /u/DMJTA1/zAppBuild/scripts/shiplistgen.sh
     JavaBuild: /u/DMJTA1/zAppBuild/scripts/java-build.sh 
     UCD_Deploy: /u/DMJTA1/zAppBuild/scripts/DeployUCD.sh
-    ProjHome: GenappML2/cics-genapp/base/src/JAVA/
+    ProjHome: GenappExtended/cics-genapp/base/src/JAVA/
     BuildProj: GJAA-genapp 
     JavaVersion: 1.0.0 
     JVMServer: OSGCOB2
@@ -38,6 +38,7 @@ on:
   push:
     paths:
       - '**/JAVA/GJAA-genapp/**'
+      - '**/JAVA/GJAA-genapp/*'
       
 concurrency:
     group: Main-Java-Build
