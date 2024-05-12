@@ -172,15 +172,12 @@ jobs:
         run: ${{ env.DBB_Host }} ${{ env.DBB_Build }} ${{ env.MyWorkDir }} ${{ env.MyWorkSpace }}/${{ env.AppName }} ${{ env.MyApplication }} ${{ env.MyHlq }} -i  -b origin/${{ steps.readfile.outputs.tag }}        
         shell: cmd 
 
-   #   - name: Print Compiler Listing
-   #     if: steps.dbb-build.outcome == 'failure' && startsWith(github.ref, 'refs/heads/GENAP')  # Conditional based on the outcome of dbb-build
-   #     run: ${{ env.DBB_Host }} ${{ env.Print }} ${{ env.MyWorkSpace }}/${{ env.AppName }}/work 
-   #     shell: cmd 
 
       - name: Package for Dev
         if: startsWith(steps.getBranch.outputs.value, 'GENAP')
    #     run: ${{ env.DBB_Host }} ${{ env.UCD_Package }}   ${{ env.UCD_backendComponent }} ${{ env.MyWorkDir }} ${{ env.UCD_AppProps }} ${{ steps.getBranch.outputs.value }}.Build.${{ github.run_number }}
-        run: ${{ env.DBB_Host }} ${{ env.UCD_Package }} ${{ env.UCD_backendComponent }}  ${{ env.MyWorkDir }} ${{ env.UCD_AppProps }} ${{ steps.getBranch.outputs.value }}.Build.${{ github.run_number }}
+   #     run: ${{ env.DBB_Host }} ${{ env.UCD_Package }} ${{ env.UCD_backendComponent }}  ${{ env.MyWorkDir }} ${{ env.UCD_AppProps }} ${{ steps.getBranch.outputs.value }}.Build.${{ github.run_number }}
+        run: ${{ env.DBB_Host }} ${{ env.UCD_Package }} ${{ env.UCD_backendComponent }}  ${{ env.MyWorkDir }} ${{ env.UCD_AppProps }} ${{ steps.getBranch.outputs.value }}
         shell: cmd 
         
     #  - name: Deployment to Applications Dev LPAR  
@@ -200,3 +197,4 @@ jobs:
     #    run: ${{ env.DBB_Host }} ${{ env.UCD_Deploy }} ${{ env.UCDApplication }}  ${{ env.UCD_PreProd_LPAR }} ${{ env.UCD_Server_URL }} ${{ env.UCD_backendComponent }}:${{ steps.getBranch.outputs.value }}.HF.${{ github.run_number }}  ${{ env.UCD_AppDeployProcess }} ${{ env.UCD_AppProps }}
     #    run: ${{ env.DBB_Host }} ${{ env.UCD_Deploy }} ${{ env.UCDApplication }}  ${{ env.UCD_PreProd_LPAR }} ${{ env.UCD_Server_URL }} ${{ env.UCD_backendComponent }}:${{ steps.getBranch.outputs.value }}${{ github.run_number }}  ${{ env.UCD_AppDeployProcess }}
     #    shell: cmd        
+
