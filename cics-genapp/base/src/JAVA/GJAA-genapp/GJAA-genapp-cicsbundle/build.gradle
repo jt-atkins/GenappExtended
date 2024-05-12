@@ -5,6 +5,7 @@ plugins {
 repositories {
   mavenCentral()
 }
+
 cicsBundle {
     build {
         defaultJVMServer = project.jvmserver
