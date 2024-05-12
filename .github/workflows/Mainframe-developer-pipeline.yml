@@ -159,7 +159,7 @@ jobs:
    #     run: ${{ env.DBB_Host }} ${{ env.DBB_Build }} ${{ env.MyWorkDir }} ${{ env.MyWorkSpace }}/${{ env.AppName }} ${{ env.MyApplication }} ${{ env.MyHlq }}.${{ steps.hlq.outputs.substring }} -i  -b ${{ steps.readfile.outputs.tag }}        
         run: | 
           ${{ env.DBB_Host }} ${{ env.DBB_Build }} ${{ env.MyWorkDir }} ${{ env.MyWorkSpace }}/${{ env.AppName }} ${{ env.MyApplication }} ${{ env.MyHlq }}.${{ steps.hlq.outputs.substring }} -i  -b origin/main
-          ${{ env.DBB_Host }} ${{ env.Print }} ${{ env.MyWorkSpace }}/${{ env.AppName }}/work 
+          ${{ env.DBB_Host }} ${{ env.Print }} ${{ env.MyWorkSpace }}/work 
         shell: cmd 
 
       - name: Release Maintenance DBB Impact Build Based on Previous Main Tag
@@ -179,20 +179,20 @@ jobs:
         run: ${{ env.DBB_Host }} ${{ env.UCD_Package }} ${{ env.UCD_backendComponent }}  ${{ env.MyWorkDir }} ${{ env.UCD_AppProps }} ${{ steps.getBranch.outputs.value }}.Build.${{ github.run_number }}
         shell: cmd 
         
-      - name: Deployment to Applications Dev LPAR  
-        if: startsWith(steps.getBranch.outputs.value, 'GENAP')
-   #     run: ${{ env.DBB_Host }} ${{ env.UCD_Deploy }} ${{ env.UCDApplication }}  ${{ env.UCD_Dev_LPAR }} ${{ env.UCD_Server_URL }} ${{ env.UCD_backendComponent }}:${{ steps.getBranch.outputs.value }}.Build.${{ github.run_number }}  ${{ env.UCD_AppDeployProcess }} ${{ env.UCD_AppProps }}
-        run: ${{ env.DBB_Host }} ${{ env.UCD_Deploy }} ${{ env.UCDApplication }}  ${{ env.UCD_Dev_LPAR }} ${{ env.UCD_Server_URL }} ${{ env.UCD_backendComponent }}:${{ steps.getBranch.outputs.value }}.Build.${{ github.run_number }}  ${{ env.UCD_AppDeployProcess }} ${{ env.UCD_AppProps }}
+    #  - name: Deployment to Applications Dev LPAR  
+    #    if: startsWith(steps.getBranch.outputs.value, 'GENAP')
+    #     run: ${{ env.DBB_Host }} ${{ env.UCD_Deploy }} ${{ env.UCDApplication }}  ${{ env.UCD_Dev_LPAR }} ${{ env.UCD_Server_URL }} ${{ env.UCD_backendComponent }}:${{ steps.getBranch.outputs.value }}.Build.${{ github.run_number }}  ${{ env.UCD_AppDeployProcess }} ${{ env.UCD_AppProps }}
+    #    run: ${{ env.DBB_Host }} ${{ env.UCD_Deploy }} ${{ env.UCDApplication }}  ${{ env.UCD_Dev_LPAR }} ${{ env.UCD_Server_URL }} ${{ env.UCD_backendComponent }}:${{ steps.getBranch.outputs.value }}.Build.${{ github.run_number }}  ${{ env.UCD_AppDeployProcess }} ${{ env.UCD_AppProps }}
 
-        shell: cmd 
+    #    shell: cmd 
 
-      - name: Hotfix Package for Pre-Prod
-        if: startsWith(steps.getBranch.outputs.value, 'hotfix')
-        run: ${{ env.DBB_Host }} ${{ env.UCD_Package }} ${{ env.UCD_backendComponent }}  ${{ env.MyWorkDir }} ${{ env.UCD_AppProps }} ${{ steps.getBranch.outputs.value }}${{ github.run_number }}
-        shell: cmd 
+    #  - name: Hotfix Package for Pre-Prod
+    #    if: startsWith(steps.getBranch.outputs.value, 'hotfix')
+    #    run: ${{ env.DBB_Host }} ${{ env.UCD_Package }} ${{ env.UCD_backendComponent }}  ${{ env.MyWorkDir }} ${{ env.UCD_AppProps }} ${{ steps.getBranch.outputs.value }}${{ github.run_number }}
+    #    shell: cmd 
         
-      - name: Hotfix Deployment to Applications PreProd LPAR  
-        if: startsWith(steps.getBranch.outputs.value, 'hotfix')
+    #  - name: Hotfix Deployment to Applications PreProd LPAR  
+    #    if: startsWith(steps.getBranch.outputs.value, 'hotfix')
     #    run: ${{ env.DBB_Host }} ${{ env.UCD_Deploy }} ${{ env.UCDApplication }}  ${{ env.UCD_PreProd_LPAR }} ${{ env.UCD_Server_URL }} ${{ env.UCD_backendComponent }}:${{ steps.getBranch.outputs.value }}.HF.${{ github.run_number }}  ${{ env.UCD_AppDeployProcess }} ${{ env.UCD_AppProps }}
-        run: ${{ env.DBB_Host }} ${{ env.UCD_Deploy }} ${{ env.UCDApplication }}  ${{ env.UCD_PreProd_LPAR }} ${{ env.UCD_Server_URL }} ${{ env.UCD_backendComponent }}:${{ steps.getBranch.outputs.value }}${{ github.run_number }}  ${{ env.UCD_AppDeployProcess }}
-        shell: cmd        
+    #    run: ${{ env.DBB_Host }} ${{ env.UCD_Deploy }} ${{ env.UCDApplication }}  ${{ env.UCD_PreProd_LPAR }} ${{ env.UCD_Server_URL }} ${{ env.UCD_backendComponent }}:${{ steps.getBranch.outputs.value }}${{ github.run_number }}  ${{ env.UCD_AppDeployProcess }}
+    #    shell: cmd        
