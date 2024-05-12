@@ -201,7 +201,7 @@
       * COBOL / Java  switch                                           *
 
       *     PERFORM CHECK-FIRST-JAVA.
-          PERFORM CHECK-FIRST-COBOL.
+           PERFORM CHECK-FIRST-COBOL.
        CHECK-FIRST-EXIT.
            EXIT.
 
