@@ -38,6 +38,7 @@ on:
   push:
     paths:
       - '**/JAVA/GJAA-genapp/**'
+      - '**/JAVA/GJAA-genapp/*'
       
 concurrency:
     group: Main-Java-Build
