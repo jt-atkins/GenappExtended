@@ -2,11 +2,13 @@ name: On-Create-Branch
 env:
   MyBranch: ${{ github.ref }}
 on:
-  create:
-    branches:
-      - 'G*'
-      - 'v*'
-      - 'e*'
+  workflow_dispatch:
+    
+#  create:
+#    branches:
+#      - 'G*'
+#      - 'v*'
+#      - 'e*'
       
 concurrency:
     group: Main-Branch
