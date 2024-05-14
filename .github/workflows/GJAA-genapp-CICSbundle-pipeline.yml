@@ -68,7 +68,7 @@ jobs:
         shell: cmd
 
       - name: Package
-        run: ${{ env.DBB_Host }} ${{ env.Package }}  ${{ env.UCD_JavaComponent }} JavaBuild.${{ github.run_number }} ${{ env.MyWorkSpace }}/${{ env.AppName }}/shiplist.xml
+        run: ${{ env.DBB_Host }} ${{ env.Package }}  ${{ env.UCD_JavaComponent }} JavaBuild.${{ env.MyBranch }}.${{ github.run_number }} ${{ env.MyWorkSpace }}/${{ env.AppName }}/shiplist.xml
         shell: cmd
 
       - name: Deployment to Applications DEV LPAR   
