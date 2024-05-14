@@ -6,7 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
 
-//SF: Import CICS Container abstraction class
+//SF: Import CICS Container abstraction class.
 import com.ibmzpot.common.CobolData;
 
 public class CaCustomerRequest extends Dfhcommarea1 {
