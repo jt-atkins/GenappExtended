@@ -5,11 +5,17 @@ import com.ibm.jzos.fields.ExternalDecimalAsIntField;
 import com.ibm.jzos.fields.StringField;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-
-//SF: Import CICS Container abstraction class
 import com.ibmzpot.common.CobolData;
 
 public class WsResponse implements Comparable<WsResponse> {
+
+    public void returnWsResponse() {
+        CobolData output = new CobolData();
+        String fixedResponseCode = String.format("%02d", this.wsResponseCode);
+        String fixedResponseMessage = String.format("%-78s", this.wsResponseMessage);
+        output.putCobolData(fixedResponseCode fixedResponseMessage);
+    }
+
     private int wsResponseCode;
     private String wsResponseMessage = "";
     
@@ -64,12 +70,10 @@ public class WsResponse implements Comparable<WsResponse> {
     public void setWsResponseMessage(String wsResponseMessage) {
         this.wsResponseMessage = wsResponseMessage;
     }
-    
     public void reset() {
         wsResponseCode = 0;
         wsResponseMessage = "";
     }
-    
     
     public String toString() {
         StringBuilder s = new StringBuilder();
@@ -115,14 +119,14 @@ public class WsResponse implements Comparable<WsResponse> {
         factory.setStringEncoding("IBM-1047");
     }
     
-    private static final ExternalDecimalAsIntField WSRESPONSECODE = factory.getExternalDecimalAsIntField(2, true);
-    private static final StringField WSRESPONSEMESSAGE = factory.getStringField(78);
+    private static final ExternalDecimalAsIntField WS_RESPONSE_CODE = factory.getExternalDecimalAsIntField(2, true);
+    private static final StringField WS_RESPONSE_MESSAGE = factory.getStringField(78);
     public static final int SIZE = factory.getOffset();
     // End of COBOL-compatible binary serialization metadata
     
     public byte[] getBytes(byte[] bytes, int offset) {
-        WSRESPONSECODE.putInt(wsResponseCode, bytes, offset);
-        WSRESPONSEMESSAGE.putString(wsResponseMessage, bytes, offset);
+        WS_RESPONSE_CODE.putInt(wsResponseCode, bytes, offset);
+        WS_RESPONSE_MESSAGE.putString(wsResponseMessage, bytes, offset);
         return bytes;
     }
     
@@ -148,8 +152,8 @@ public class WsResponse implements Comparable<WsResponse> {
             Arrays.fill(newBytes, bytes.length, SIZE + offset, (byte)0x40 /*default EBCDIC space character*/);
             bytes = newBytes;
         }
-        wsResponseCode = WSRESPONSECODE.getInt(bytes, offset);
-        wsResponseMessage = WSRESPONSEMESSAGE.getString(bytes, offset);
+        wsResponseCode = WS_RESPONSE_CODE.getInt(bytes, offset);
+        wsResponseMessage = WS_RESPONSE_MESSAGE.getString(bytes, offset);
     }
     
     
@@ -169,11 +173,4 @@ public class WsResponse implements Comparable<WsResponse> {
         return SIZE;
     }
     
-    // SF: Return response to caller in an output Container
-    public void returnWsResponse() {
-        CobolData output = new CobolData();
-        String fixedResponseCode = String.format("%02d", this.wsResponseCode);          // pad with leading zeros
-        String fixedResponseMessage = String.format("%-78s", this.wsResponseMessage);   // pad with trailing spaces
-        output.putCobolData(fixedResponseCode + fixedResponseMessage);
-    }
 }
