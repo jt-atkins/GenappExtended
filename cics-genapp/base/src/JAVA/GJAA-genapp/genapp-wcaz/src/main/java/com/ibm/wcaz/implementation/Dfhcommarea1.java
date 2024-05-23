@@ -34,11 +34,6 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
         }
     }
     
-    
-    public void reset() {
-    }
-    
-    
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("}");
@@ -119,4 +114,10 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
     public int numBytes() {
         return SIZE;
     }
+
+    public void reset() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'reset'");
+    }
+    
 }

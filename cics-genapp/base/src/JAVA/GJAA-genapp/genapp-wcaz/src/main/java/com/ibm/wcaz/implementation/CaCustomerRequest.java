@@ -4,20 +4,15 @@ import com.ibm.jzos.fields.CobolDatatypeFactory;
 import com.ibm.jzos.fields.StringField;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-
-
-//SF:: Import CICS Container abstraction class
 import com.ibmzpot.common.CobolData;
 
 public class CaCustomerRequest extends Dfhcommarea1 {
     private String caPostcode = "";
     
-    // SF: Constructor - initialise object using data provided in an input Container
     public CaCustomerRequest() {
         CobolData input = new CobolData();
         this.caPostcode = input.getCobolData();
-    }
-    
+    }    
     public CaCustomerRequest(String caPostcode) {
         this.caPostcode = caPostcode;
     }
@@ -58,12 +53,10 @@ public class CaCustomerRequest extends Dfhcommarea1 {
     public void setCaPostcode(String caPostcode) {
         this.caPostcode = caPostcode;
     }
-    
     public void reset() {
         super.reset();
         caPostcode = "";
     }
-    
     
     public String toString() {
         StringBuilder s = new StringBuilder(super.toString());
@@ -121,13 +114,13 @@ public class CaCustomerRequest extends Dfhcommarea1 {
         factory.incrementOffset(Dfhcommarea1.SIZE);
     }
     
-    private static final StringField CAPOSTCODE = factory.getStringField(8);
+    private static final StringField CA_POSTCODE = factory.getStringField(8);
     public static final int SIZE = factory.getOffset();
     // End of COBOL-compatible binary serialization metadata
     
     public byte[] getBytes(byte[] bytes, int offset) {
         super.getBytes(bytes, offset);
-        CAPOSTCODE.putString(caPostcode, bytes, offset);
+        CA_POSTCODE.putString(caPostcode, bytes, offset);
         return bytes;
     }
     
@@ -138,10 +131,11 @@ public class CaCustomerRequest extends Dfhcommarea1 {
             bytes = newBytes;
         }
         super.setBytes(bytes, offset);
-        caPostcode = CAPOSTCODE.getString(bytes, offset);
+        caPostcode = CA_POSTCODE.getString(bytes, offset);
     }
     
     public int numBytes() {
         return SIZE;
     }
+    
 }
