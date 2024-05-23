@@ -1,6 +1,5 @@
 package com.ibm.wcaz.implementation;
 
-import com.ibm.CobolData;
 import com.ibm.jzos.fields.CobolDatatypeFactory;
 import com.ibm.jzos.fields.StringField;
 import java.io.UnsupportedEncodingException;
