@@ -11,9 +11,9 @@ public class CaCustomerRequest extends Dfhcommarea1 {
     
     public CaCustomerRequest() {
         CobolData input = new CobolData();
-        this.CaPostcode = input.getCobolData();
+        this.caPostcode = input.getCobolData();
     }
-    
+   
     public CaCustomerRequest(String caPostcode) {
         this.caPostcode = caPostcode;
     }
