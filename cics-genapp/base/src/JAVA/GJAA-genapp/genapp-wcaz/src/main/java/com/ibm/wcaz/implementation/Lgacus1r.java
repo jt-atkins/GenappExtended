@@ -2,31 +2,33 @@ package com.ibm.wcaz.implementation;
 
 import com.ibm.jzos.fields.CobolDatatypeFactory;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import com.ibm.cics.server.invocation.CICSProgram;
 
-public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
-    public Dfhcommarea1() {}
+public class Lgacus1r implements Comparable<Lgacus1r> {
+    public Lgacus1r() {}
     
-    public Dfhcommarea1(Dfhcommarea1 that) {
+    public Lgacus1r(Lgacus1r that) {
     }
     
-    protected Dfhcommarea1(byte[] bytes, int offset) {
+    protected Lgacus1r(byte[] bytes, int offset) {
         setBytes(bytes, offset);
     }
     
-    protected Dfhcommarea1(byte[] bytes) {
+    protected Lgacus1r(byte[] bytes) {
         this(bytes, 0);
     }
     
-    public static Dfhcommarea1 fromBytes(byte[] bytes, int offset) {
-        return new Dfhcommarea1(bytes, offset);
+    public static Lgacus1r fromBytes(byte[] bytes, int offset) {
+        return new Lgacus1r(bytes, offset);
     }
     
-    public static Dfhcommarea1 fromBytes(byte[] bytes) {
+    public static Lgacus1r fromBytes(byte[] bytes) {
         return fromBytes(bytes, 0);
     }
     
-    public static Dfhcommarea1 fromBytes(String bytes) {
+    public static Lgacus1r fromBytes(String bytes) {
         try {
             return fromBytes(bytes.getBytes(factory.getStringEncoding()));
         } catch (UnsupportedEncodingException e) {
@@ -34,19 +36,47 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
         }
     }
     
+    
+    
+    @CICSProgram("LGACJV02")
+    public static void checkFirstCobol() {
+    CaCustomerRequest caCustomerRequest = new CaCustomerRequest();
+    WsResponse wsResponse = new WsResponse();
+    wsResponse.setWsResponseCode(0);
+    wsResponse.setWsResponseMessage("");
+    if (caCustomerRequest.getCaPostcode().substring(0, 2).toUpperCase().equals("GB")) {
+        // TODO: Empty block may need to be addressed
+    } else if (caCustomerRequest.getCaPostcode().substring(0, 2).toUpperCase().equals("US")) {
+        // TODO: Empty block may need to be addressed
+    } else if (caCustomerRequest.getCaPostcode().substring(0, 2).toUpperCase().equals("UK")) {
+        // TODO: Empty block may need to be addressed
+    } else if (caCustomerRequest.getCaPostcode().substring(0, 2).toUpperCase().equals("DN")) {
+        // TODO: Empty block may need to be addressed
+    } else {
+        wsResponse.setWsResponseCode(Integer.parseInt("82"));
+        wsResponse.setWsResponseMessage("Invalid postcode: " + caCustomerRequest.getCaPostcode());
+    }
+
+    wsResponse.returnWsResponse();
+}
+
+    
+    public static void main(String[] args) {
+        checkFirstCobol();
+    }
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("}");
         return s.toString();
     }
     
-    public boolean equals(Dfhcommarea1 that) {
+    public boolean equals(Lgacus1r that) {
         return true;
     }
     
     @Override
     public boolean equals(Object that) {
-        return (that instanceof Dfhcommarea1) && this.equals((Dfhcommarea1)that);
+        return (that instanceof Lgacus1r) && this.equals((Lgacus1r)that);
     }
     
     @Override
@@ -55,7 +85,7 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
     }
     
     @Override
-    public int compareTo(Dfhcommarea1 that) {
+    public int compareTo(Lgacus1r that) {
         int c = 0;
         return c;
     }
@@ -113,11 +143,6 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
     
     public int numBytes() {
         return SIZE;
-    }
-
-    public void reset() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'reset'");
     }
     
 }
