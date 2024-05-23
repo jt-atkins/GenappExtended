@@ -16,7 +16,7 @@ public class WsResponse implements Comparable<WsResponse> {
 
     public void returnWsResponse() {
         CobolData output = new CobolData();
-        String fixedResponseCode = String.format("%02d", this.wsResponseCode)
+        String fixedResponseCode = String.format("%02d", this.wsResponseCode);
         String fixedResponseMessage = String.format("%-78s", this.wsResponseMessage);
         output.putCobolData(fixedResponseCode + fixedResponseMessage);
     }
