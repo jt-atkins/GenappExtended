@@ -5,32 +5,31 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-// SF/
 import com.ibm.cics.server.invocation.CICSProgram;
 
-public class Postchck implements Comparable<Postchck> {
-    public Postchck() {}
+public class RAExpoj implements Comparable<RAExpoj> {
+    public RAExpoj() {}
     
-    public Postchck(Postchck that) {
+    public RAExpoj(RAExpoj that) {
     }
     
-    protected Postchck(byte[] bytes, int offset) {
+    protected RAExpoj(byte[] bytes, int offset) {
         setBytes(bytes, offset);
     }
     
-    protected Postchck(byte[] bytes) {
+    protected RAExpoj(byte[] bytes) {
         this(bytes, 0);
     }
     
-    public static Postchck fromBytes(byte[] bytes, int offset) {
-        return new Postchck(bytes, offset);
+    public static RAExpoj fromBytes(byte[] bytes, int offset) {
+        return new RAExpoj(bytes, offset);
     }
     
-    public static Postchck fromBytes(byte[] bytes) {
+    public static RAExpoj fromBytes(byte[] bytes) {
         return fromBytes(bytes, 0);
     }
     
-    public static Postchck fromBytes(String bytes) {
+    public static RAExpoj fromBytes(String bytes) {
         try {
             return fromBytes(bytes.getBytes(factory.getStringEncoding()));
         } catch (UnsupportedEncodingException e) {
@@ -38,56 +37,48 @@ public class Postchck implements Comparable<Postchck> {
         }
     }
     
-    
-    public void reset() {
-    }
-    
-    //SF: make this Method available as a CICS program
     @CICSProgram("LGACJV02")
-    public static void checkFirst() {
-        CaCustomerRequest caCustomerRequest = new CaCustomerRequest();
-        WsResponse wsResponse = new WsResponse();
-
-        wsResponse.setWsResponseCode(0);
-        wsResponse.setWsResponseMessage("");
-        if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("GB")) {
-        }
-        else if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("US")) {
-        }
-        else if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("UK")) {
-        }
-        else if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("DN")) {
-        }
-        else {
-            wsResponse.setWsResponseCode(82);
-            String jdeclVar1 = "Invalid postcode: " + caCustomerRequest.getCaPostcode();
-            wsResponse.setWsResponseMessage(jdeclVar1);
-        }
-
-        // SF: Return response to caller
+    public static void checkFirstCobol() {
+    CaCustomerRequest caCustomerRequest = new CaCustomerRequest();
+    WsResponse wsResponse = new WsResponse();
+    wsResponse.setWsResponseCode(0);
+    wsResponse.setWsResponseMessage("");
+    if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("GB")
+            || caCustomerRequest.getCaPostcode().substring(0, 2).equals("gb")) {
+        // TODO: Empty block may need to be addressed
+    } else if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("US")
+            || caCustomerRequest.getCaPostcode().substring(0, 2).equals("us")) {
+        // TODO: Empty block may need to be addressed
+    } else if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("UK")
+            || caCustomerRequest.getCaPostcode().substring(0, 2).equals("uk")) {
+        // TODO: Empty block may need to be addressed
+    } else if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("DN")
+            || caCustomerRequest.getCaPostcode().substring(0, 2).equals("dn")) {
+        // TODO: Empty block may need to be addressed
+    } else {
+        wsResponse.setWsResponseCode(Integer.parseInt("82"));
+        wsResponse.setWsResponseMessage("Invalid postcode: " + caCustomerRequest.getCaPostcode());
         wsResponse.returnWsResponse();
     }
-
-    
+}
 
     
     public static void main(String[] args) {
-        checkFirst();
+        checkFirstCobol();
     }
-    
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("}");
         return s.toString();
     }
     
-    public boolean equals(Postchck that) {
+    public boolean equals(RAExpoj that) {
         return true;
     }
     
     @Override
     public boolean equals(Object that) {
-        return (that instanceof Postchck) && this.equals((Postchck)that);
+        return (that instanceof RAExpoj) && this.equals((RAExpoj)that);
     }
     
     @Override
@@ -96,7 +87,7 @@ public class Postchck implements Comparable<Postchck> {
     }
     
     @Override
-    public int compareTo(Postchck that) {
+    public int compareTo(RAExpoj that) {
         int c = 0;
         return c;
     }
@@ -155,4 +146,5 @@ public class Postchck implements Comparable<Postchck> {
     public int numBytes() {
         return SIZE;
     }
+    
 }
