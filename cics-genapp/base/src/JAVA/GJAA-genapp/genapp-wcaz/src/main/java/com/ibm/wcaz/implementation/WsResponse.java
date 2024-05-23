@@ -8,14 +8,6 @@ import java.util.Arrays;
 import com.ibmzpot.common.CobolData;
 
 public class WsResponse implements Comparable<WsResponse> {
-
-    public void returnWsResponse() {
-        CobolData output = new CobolData();
-        String fixedResponseCode = String.format("%02d", this.wsResponseCode);
-        String fixedResponseMessage = String.format("%-78s", this.wsResponseMessage);
-        output.putCobolData(fixedResponseCode fixedResponseMessage);
-    }
-
     private int wsResponseCode;
     private String wsResponseMessage = "";
     
@@ -173,4 +165,11 @@ public class WsResponse implements Comparable<WsResponse> {
         return SIZE;
     }
     
+	public void returnWsResponse() {
+        CobolData output = new CobolData();
+        String fixedResponseCode = String.format("%02d", this.wsResponseCode);          // pad with leading zeros
+        String fixedResponseMessage = String.format("%-78s", this.wsResponseMessage);   // pad with trailing spaces
+        output.putCobolData(fixedResponseCode + fixedResponseMessage);
+    }
+	
 }

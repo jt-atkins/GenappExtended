@@ -3,7 +3,7 @@ package com.ibm.wcaz.implementation;
 import com.ibm.jzos.fields.CobolDatatypeFactory;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-import com.ibm.cics.server.invocation.CICSprogram;
+import com.ibm.cics.server.invocation.CICSProgram;
 
 public class Raexpor1 implements Comparable<Raexpor1> {
     public Raexpor1() {}
