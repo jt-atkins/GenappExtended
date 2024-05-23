@@ -11,8 +11,8 @@ import com.ibmzpot.common.CobolData;
 public class WsResponse implements Comparable<WsResponse> {
     public void returnWsResponse() {
         CobolData output = new CobolData();
-        string fixedResponseCode = String.format("%02d", this.wsResponseCode);
-        string fixedResponseMessage = string.format("%-78s", this.wsResponseMessage);
+        String fixedResponseCode = String.format("%02d", this.wsResponseCode);
+        String fixedResponseMessage = String.format("%-78s", this.wsResponseMessage);
         output.putCobolData(fixedResponseCode + fixedResponseMessage);
     }
     private int wsResponseCode;

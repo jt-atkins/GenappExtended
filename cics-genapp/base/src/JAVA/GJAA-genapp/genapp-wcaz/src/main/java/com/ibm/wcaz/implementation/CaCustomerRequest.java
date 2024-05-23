@@ -7,11 +7,11 @@ import java.util.Arrays;
 import com.ibmzpot.common.CobolData;
 
 public class CaCustomerRequest extends Dfhcommarea1 {
-    private String caPostcode = "01";
+    private String caPostcode = "";
     
     public CaCustomerRequest() {
         CobolData input = new CobolData();
-        this.CaPostcode = input.CobolData();
+        this.CaPostcode = input.getCobolData();
     }
     
     public CaCustomerRequest(String caPostcode) {
