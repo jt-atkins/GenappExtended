@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import com.ibmzpot.common.CobolData;
 
+// AxelChange1
 public class WsResponse implements Comparable<WsResponse> {
     public void returnWsResponse() {
         CobolData output = new CobolData();
