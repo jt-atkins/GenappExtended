@@ -8,12 +8,12 @@ import java.util.Arrays;
 import com.ibmzpot.common.CobolData;
 
 public class WsResponse implements Comparable<WsResponse> {
-    public void returnWResponse() (
+    public void returnWsResponse() {
         CobolData output = new CobolData();
         string fixedResponseCode = String.format("%02d", this.wsResponseCode);
         string fixedResponseMessage = string.format("%-78s", this.wsResponseMessage);
         output.putCobolData(fixedResponseCode + fixedResponseMessage);
-     )
+    }
     private int wsResponseCode;
     private String wsResponseMessage = "";
     
