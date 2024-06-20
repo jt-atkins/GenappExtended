@@ -37,6 +37,7 @@ public class Raexport implements Comparable<Raexport> {
     }
     
     
+    
     @CICSProgram("LGACUS01")
     public static void checkFirstCobol() {
         CaCustomerRequest caCustomerRequest = new CaCustomerRequest();
