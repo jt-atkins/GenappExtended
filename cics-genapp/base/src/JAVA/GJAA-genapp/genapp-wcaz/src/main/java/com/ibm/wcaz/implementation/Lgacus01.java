@@ -91,7 +91,7 @@ public class Lgacus01 implements Comparable<Lgacus01> {
     
     public final String toByteString() {
         try {
-            return new String(getBytes(), factory.getStringEncoding()).stripTrailing();
+            return new String(getBytes(), factory.getStringEncoding());
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }

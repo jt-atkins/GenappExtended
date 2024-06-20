@@ -84,7 +84,7 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
     
     public final String toByteString() {
         try {
-            return new String(getBytes(), factory.getStringEncoding()).stripTrailing();
+            return new String(getBytes(), factory.getStringEncoding());
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
