@@ -5,7 +5,7 @@ import com.ibm.jzos.fields.ExternalDecimalAsIntField;
 import com.ibm.jzos.fields.StringField;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-import com.ibmzpot.common.CobolData
+import com.ibmzpot.common.CobolData;
 
 public class WsResponse implements Comparable<WsResponse> {
     private int wsResponseCode;
@@ -14,11 +14,10 @@ public class WsResponse implements Comparable<WsResponse> {
     public WsResponse() {}
     
     public void returnWsResponse() {
-        CobolData output = new CobolData () ;
-        String fixedResponseCode = String. format ("·02d", this.wsResponseCode) ;
-        String fixedResponseMessage = String. format ("9-78s", this.wsResponseMessage) ;
-        output -putCobolData (fixedResponseCode +
-        fixedResponseMessage) ;
+        CobolData output = new CobolData();
+        String fixedResponseCode = String.format ("%02d", this.wsResponseCode);
+        String fixedResponseMessage = String.format ("%-78s", this.wsResponseMessage);
+        output.putCobolData(fixedResponseCode + fixedResponseMessage);
         }
 
     public WsResponse(int wsResponseCode, String wsResponseMessage) {

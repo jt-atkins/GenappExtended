@@ -4,18 +4,14 @@ import com.ibm.jzos.fields.CobolDatatypeFactory;
 import com.ibm.jzos.fields.StringField;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-import com.ibmzpot.common.CobolData
+import com.ibmzpot.common.CobolData;
 
 public class CaCustomerRequest extends Dfhcommarea1 {
     private String caPostcode = "";
     
     public CaCustomerRequest() {
-        public class CaCustomerRequest extends Dfhcommarea1 {
-            public CaCustomerRequest() {
-                CobolData input = new CobolData();
-                this.caPostcode = input.getCobolData();
-            }
-        }
+        CobolData input = new CobolData();
+        this.caPostcode = input.getCobolData();
     }
     
     public CaCustomerRequest(String caPostcode) {
