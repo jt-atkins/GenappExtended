@@ -13,7 +13,7 @@ public class CaPolicyRequest extends Dfhcommarea1 {
     public CaPolicyRequest() {}
     
     public CaPolicyRequest(String caRequestId, int caReturnCode, long caCustomerNum, long caPolicyNum, CaPolicyCommon caPolicyCommon) {
-        //super(caRequestId, caReturnCode, caCustomerNum);
+        super(caRequestId, caReturnCode, caCustomerNum);
         this.caPolicyNum = caPolicyNum;
         this.caPolicyCommon = caPolicyCommon;
     }
