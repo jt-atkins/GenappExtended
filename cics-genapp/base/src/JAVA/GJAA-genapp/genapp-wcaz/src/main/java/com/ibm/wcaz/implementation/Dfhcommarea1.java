@@ -34,11 +34,6 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
         }
     }
     
-    
-    public void reset() {
-    }
-    
-    
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("}");
@@ -89,7 +84,7 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
     
     public final String toByteString() {
         try {
-            return new String(getBytes(), factory.getStringEncoding());
+            return new String(getBytes(), factory.getStringEncoding()).stripTrailing();
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -119,4 +114,5 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
     public int numBytes() {
         return SIZE;
     }
+    
 }
