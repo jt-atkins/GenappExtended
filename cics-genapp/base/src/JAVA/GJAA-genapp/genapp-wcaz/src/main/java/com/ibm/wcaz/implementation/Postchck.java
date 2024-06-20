@@ -4,33 +4,31 @@ import com.ibm.jzos.fields.CobolDatatypeFactory;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-// SF/
 import com.ibm.cics.server.invocation.CICSProgram;
 
-public class Postchck implements Comparable<Postchck> {
-    public Postchck() {}
+public class Postcode implements Comparable<Postcode> {
+    public Postcode() {}
     
-    public Postchck(Postchck that) {
+    public Postcode(Postcode that) {
     }
     
-    protected Postchck(byte[] bytes, int offset) {
+    protected Postcode(byte[] bytes, int offset) {
         setBytes(bytes, offset);
     }
     
-    protected Postchck(byte[] bytes) {
+    protected Postcode(byte[] bytes) {
         this(bytes, 0);
     }
     
-    public static Postchck fromBytes(byte[] bytes, int offset) {
-        return new Postchck(bytes, offset);
+    public static Postcode fromBytes(byte[] bytes, int offset) {
+        return new Postcode(bytes, offset);
     }
     
-    public static Postchck fromBytes(byte[] bytes) {
+    public static Postcode fromBytes(byte[] bytes) {
         return fromBytes(bytes, 0);
     }
     
-    public static Postchck fromBytes(String bytes) {
+    public static Postcode fromBytes(String bytes) {
         try {
             return fromBytes(bytes.getBytes(factory.getStringEncoding()));
         } catch (UnsupportedEncodingException e) {
@@ -38,13 +36,8 @@ public class Postchck implements Comparable<Postchck> {
         }
     }
     
-    
-    public void reset() {
-    }
-    
-    //SF: make this Method available as a CICS program
-    @CICSProgram("LGACJV02")
-    public static void checkFirst() {
+    @CICSProgram("LGACUS01")
+    public static void checkFirstCobol() {
         CaCustomerRequest caCustomerRequest = new CaCustomerRequest();
         WsResponse wsResponse = new WsResponse();
 
@@ -67,27 +60,48 @@ public class Postchck implements Comparable<Postchck> {
         // SF: Return response to caller
         wsResponse.returnWsResponse();
     }
-
     
+    @CICSProgram("LGACUS01")
+    public static void checkFirstJava() {
+        CaCustomerRequest caCustomerRequest = new CaCustomerRequest();
+        WsResponse wsResponse = new WsResponse();
 
-    
-    public static void main(String[] args) {
-        checkFirst();
+        wsResponse.setWsResponseCode(0);
+        wsResponse.setWsResponseMessage("");
+        if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("GB")) {
+        }
+        else if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("US")) {
+        }
+        else if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("UK")) {
+        }
+        else if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("DN")) {
+        }
+        else {
+            wsResponse.setWsResponseCode(82);
+            String jdeclVar1 = "Invalid postcode: " + caCustomerRequest.getCaPostcode();
+            wsResponse.setWsResponseMessage(jdeclVar1);
+        }
+
+        // SF: Return response to caller
+        wsResponse.returnWsResponse();
     }
     
+    public static void main(String[] args) {
+        checkFirstCobol();
+    }
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("}");
         return s.toString();
     }
     
-    public boolean equals(Postchck that) {
+    public boolean equals(Postcode that) {
         return true;
     }
     
     @Override
     public boolean equals(Object that) {
-        return (that instanceof Postchck) && this.equals((Postchck)that);
+        return (that instanceof Postcode) && this.equals((Postcode)that);
     }
     
     @Override
@@ -96,7 +110,7 @@ public class Postchck implements Comparable<Postchck> {
     }
     
     @Override
-    public int compareTo(Postchck that) {
+    public int compareTo(Postcode that) {
         int c = 0;
         return c;
     }
@@ -125,7 +139,7 @@ public class Postchck implements Comparable<Postchck> {
     
     public final String toByteString() {
         try {
-            return new String(getBytes(), factory.getStringEncoding());
+            return new String(getBytes(), factory.getStringEncoding()).stripTrailing();
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -155,4 +169,5 @@ public class Postchck implements Comparable<Postchck> {
     public int numBytes() {
         return SIZE;
     }
+    
 }
