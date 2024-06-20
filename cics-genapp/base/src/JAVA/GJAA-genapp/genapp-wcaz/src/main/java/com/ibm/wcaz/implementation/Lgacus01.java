@@ -2,31 +2,32 @@ package com.ibm.wcaz.implementation;
 
 import com.ibm.jzos.fields.CobolDatatypeFactory;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
-    public Dfhcommarea1() {}
+public class Lgacus01 implements Comparable<Lgacus01> {
+    public Lgacus01() {}
     
-    public Dfhcommarea1(Dfhcommarea1 that) {
+    public Lgacus01(Lgacus01 that) {
     }
     
-    protected Dfhcommarea1(byte[] bytes, int offset) {
+    protected Lgacus01(byte[] bytes, int offset) {
         setBytes(bytes, offset);
     }
     
-    protected Dfhcommarea1(byte[] bytes) {
+    protected Lgacus01(byte[] bytes) {
         this(bytes, 0);
     }
     
-    public static Dfhcommarea1 fromBytes(byte[] bytes, int offset) {
-        return new Dfhcommarea1(bytes, offset);
+    public static Lgacus01 fromBytes(byte[] bytes, int offset) {
+        return new Lgacus01(bytes, offset);
     }
     
-    public static Dfhcommarea1 fromBytes(byte[] bytes) {
+    public static Lgacus01 fromBytes(byte[] bytes) {
         return fromBytes(bytes, 0);
     }
     
-    public static Dfhcommarea1 fromBytes(String bytes) {
+    public static Lgacus01 fromBytes(String bytes) {
         try {
             return fromBytes(bytes.getBytes(factory.getStringEncoding()));
         } catch (UnsupportedEncodingException e) {
@@ -34,19 +35,25 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
         }
     }
     
+    
+    public static void checkFirstJava() {}
+    
+    public static void main(String[] args) {
+        checkFirstJava();
+    }
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("}");
         return s.toString();
     }
     
-    public boolean equals(Dfhcommarea1 that) {
+    public boolean equals(Lgacus01 that) {
         return true;
     }
     
     @Override
     public boolean equals(Object that) {
-        return (that instanceof Dfhcommarea1) && this.equals((Dfhcommarea1)that);
+        return (that instanceof Lgacus01) && this.equals((Lgacus01)that);
     }
     
     @Override
@@ -55,7 +62,7 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
     }
     
     @Override
-    public int compareTo(Dfhcommarea1 that) {
+    public int compareTo(Lgacus01 that) {
         int c = 0;
         return c;
     }

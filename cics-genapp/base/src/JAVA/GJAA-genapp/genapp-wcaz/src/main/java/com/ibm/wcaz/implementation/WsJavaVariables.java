@@ -1,36 +1,43 @@
 package com.ibm.wcaz.implementation;
 
 import com.ibm.jzos.fields.CobolDatatypeFactory;
+import com.ibm.jzos.fields.StringField;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
-// SF/
-import com.ibm.cics.server.invocation.CICSProgram;
-
-public class Postchck implements Comparable<Postchck> {
-    public Postchck() {}
+public class WsJavaVariables implements Comparable<WsJavaVariables> {
+    private String java = "JAVA";
+    private String lgacjv02 = "LGACJV02";
     
-    public Postchck(Postchck that) {
+    public WsJavaVariables() {}
+    
+    public WsJavaVariables(String java, String lgacjv02) {
+        this.java = java;
+        this.lgacjv02 = lgacjv02;
     }
     
-    protected Postchck(byte[] bytes, int offset) {
+    public WsJavaVariables(WsJavaVariables that) {
+        this.java = that.java;
+        this.lgacjv02 = that.lgacjv02;
+    }
+    
+    protected WsJavaVariables(byte[] bytes, int offset) {
         setBytes(bytes, offset);
     }
     
-    protected Postchck(byte[] bytes) {
+    protected WsJavaVariables(byte[] bytes) {
         this(bytes, 0);
     }
     
-    public static Postchck fromBytes(byte[] bytes, int offset) {
-        return new Postchck(bytes, offset);
+    public static WsJavaVariables fromBytes(byte[] bytes, int offset) {
+        return new WsJavaVariables(bytes, offset);
     }
     
-    public static Postchck fromBytes(byte[] bytes) {
+    public static WsJavaVariables fromBytes(byte[] bytes) {
         return fromBytes(bytes, 0);
     }
     
-    public static Postchck fromBytes(String bytes) {
+    public static WsJavaVariables fromBytes(String bytes) {
         try {
             return fromBytes(bytes.getBytes(factory.getStringEncoding()));
         } catch (UnsupportedEncodingException e) {
@@ -38,66 +45,60 @@ public class Postchck implements Comparable<Postchck> {
         }
     }
     
+    public String getJava() {
+        return this.java;
+    }
     
+    public void setJava(String java) {
+        this.java = java;
+    }
+    
+    public String getLgacjv02() {
+        return this.lgacjv02;
+    }
+    
+    public void setLgacjv02(String lgacjv02) {
+        this.lgacjv02 = lgacjv02;
+    }
     public void reset() {
-    }
-    
-    //SF: make this Method available as a CICS program
-    @CICSProgram("LGACJV02")
-    public static void checkFirst() {
-        CaCustomerRequest caCustomerRequest = new CaCustomerRequest();
-        WsResponse wsResponse = new WsResponse();
-
-        wsResponse.setWsResponseCode(0);
-        wsResponse.setWsResponseMessage("");
-        if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("GB")) {
-        }
-        else if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("US")) {
-        }
-        else if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("UK")) {
-        }
-        else if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("DN")) {
-        }
-        else {
-            wsResponse.setWsResponseCode(82);
-            String jdeclVar1 = "Invalid postcode: " + caCustomerRequest.getCaPostcode();
-            wsResponse.setWsResponseMessage(jdeclVar1);
-        }
-
-        // SF: Return response to caller
-        wsResponse.returnWsResponse();
-    }
-
-    
-
-    
-    public static void main(String[] args) {
-        checkFirst();
+        java = "";
+        lgacjv02 = "";
     }
     
     public String toString() {
         StringBuilder s = new StringBuilder();
+        s.append("{ java=\"");
+        s.append(getJava());
+        s.append("\"");
+        s.append(", lgacjv02=\"");
+        s.append(getLgacjv02());
+        s.append("\"");
         s.append("}");
         return s.toString();
     }
     
-    public boolean equals(Postchck that) {
-        return true;
+    public boolean equals(WsJavaVariables that) {
+        return this.java.equals(that.java) &&
+            this.lgacjv02.equals(that.lgacjv02);
     }
     
     @Override
     public boolean equals(Object that) {
-        return (that instanceof Postchck) && this.equals((Postchck)that);
+        return (that instanceof WsJavaVariables) && this.equals((WsJavaVariables)that);
     }
     
     @Override
     public int hashCode() {
-        return 0;
+        return java.hashCode() ^
+            Integer.rotateLeft(lgacjv02.hashCode(), 1);
     }
     
     @Override
-    public int compareTo(Postchck that) {
+    public int compareTo(WsJavaVariables that) {
         int c = 0;
+        c = this.java.compareTo(that.java);
+        if ( c != 0 ) return c;
+        c = this.lgacjv02.compareTo(that.lgacjv02);
         return c;
     }
     
@@ -108,10 +109,14 @@ public class Postchck implements Comparable<Postchck> {
         factory.setStringEncoding("IBM-1047");
     }
     
+    private static final StringField JAVA = factory.getStringField(8);
+    private static final StringField LGACJV_02 = factory.getStringField(8);
     public static final int SIZE = factory.getOffset();
     // End of COBOL-compatible binary serialization metadata
     
     public byte[] getBytes(byte[] bytes, int offset) {
+        JAVA.putString(java, bytes, offset);
+        LGACJV_02.putString(lgacjv02, bytes, offset);
         return bytes;
     }
     
@@ -125,7 +130,7 @@ public class Postchck implements Comparable<Postchck> {
     
     public final String toByteString() {
         try {
-            return new String(getBytes(), factory.getStringEncoding());
+            return new String(getBytes(), factory.getStringEncoding()).stripTrailing();
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -137,6 +142,8 @@ public class Postchck implements Comparable<Postchck> {
             Arrays.fill(newBytes, bytes.length, SIZE + offset, (byte)0x40 /*default EBCDIC space character*/);
             bytes = newBytes;
         }
+        java = JAVA.getString(bytes, offset);
+        lgacjv02 = LGACJV_02.getString(bytes, offset);
     }
     
     
@@ -155,4 +162,5 @@ public class Postchck implements Comparable<Postchck> {
     public int numBytes() {
         return SIZE;
     }
+    
 }
