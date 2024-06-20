@@ -5,6 +5,7 @@ import com.ibm.jzos.fields.ExternalDecimalAsIntField;
 import com.ibm.jzos.fields.StringField;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import com.ibm.ibmzpot.common.CobolData;
 
 public class WsResponse implements Comparable<WsResponse> {
     private int wsResponseCode;
