@@ -90,6 +90,7 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
         }
     }
     
+    
     public void setBytes(byte[] bytes, int offset) {
         if (bytes.length < SIZE + offset) {
             byte[] newBytes = Arrays.copyOf(bytes, SIZE + offset);
