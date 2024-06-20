@@ -4,7 +4,7 @@ import com.ibm.jzos.fields.CobolDatatypeFactory;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import com.ibm.cics.server.invocation.*;
+import com.ibm.cics.server.invocation.CICSProgram;
 
 public class Raexport implements Comparable<Raexport> {
     public Raexport() {}
@@ -36,7 +36,7 @@ public class Raexport implements Comparable<Raexport> {
         }
     }
     
-    @CICSPRogram("LGACUS01")
+    @CICSProgram("LGACUS01")
     public static void checkFirstCobol() {
     CaCustomerRequest caCustomerRequest = new CaCustomerRequest();
     WsResponse wsResponse = new WsResponse();
@@ -110,7 +110,7 @@ public class Raexport implements Comparable<Raexport> {
     
     public final String toByteString() {
         try {
-            return new String(getBytes(), factory.getStringEncoding()).stripTrailing();
+            return new String(getBytes(), factory.getStringEncoding()).trim();
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
