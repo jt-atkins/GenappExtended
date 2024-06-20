@@ -1,36 +1,37 @@
 package com.ibm.wcaz.implementation;
 
+import com.ibm.cics.server.Channel;
+import com.ibm.cics.server.Container;
+import com.ibm.cics.server.Task;
 import com.ibm.jzos.fields.CobolDatatypeFactory;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-// SF/
-import com.ibm.cics.server.invocation.CICSProgram;
-
-public class Postchck implements Comparable<Postchck> {
-    public Postchck() {}
+public class Raexport implements Comparable<Raexport> {
+    public Raexport() {}
     
-    public Postchck(Postchck that) {
+    public Raexport(Raexport that) {
     }
     
-    protected Postchck(byte[] bytes, int offset) {
+    protected Raexport(byte[] bytes, int offset) {
         setBytes(bytes, offset);
     }
     
-    protected Postchck(byte[] bytes) {
+    protected Raexport(byte[] bytes) {
         this(bytes, 0);
     }
     
-    public static Postchck fromBytes(byte[] bytes, int offset) {
-        return new Postchck(bytes, offset);
+    public static Raexport fromBytes(byte[] bytes, int offset) {
+        return new Raexport(bytes, offset);
     }
     
-    public static Postchck fromBytes(byte[] bytes) {
+    public static Raexport fromBytes(byte[] bytes) {
         return fromBytes(bytes, 0);
     }
     
-    public static Postchck fromBytes(String bytes) {
+    public static Raexport fromBytes(String bytes) {
         try {
             return fromBytes(bytes.getBytes(factory.getStringEncoding()));
         } catch (UnsupportedEncodingException e) {
@@ -39,55 +40,40 @@ public class Postchck implements Comparable<Postchck> {
     }
     
     
-    public void reset() {
+    public static void insertCustomer() {
+    Dfhcommarea1 dfhcommarea1 = new Dfhcommarea1();
+    String wsStatus = "";
+    if (wsStatus.equals("valid")) {
+        Task jdeclTask = Task.getTask();
+        Channel jdeclChannelObj = jdeclTask.getCurrentChannel();
+        Container jdeclContainerObj = jdeclChannelObj.getContainer(dfhcommarea1.getLgapdb01());
+        byte[] jdeclCommareaByteArray = jdeclContainerObj.get();
+        Charset jdeclCharSet = Charset.forName(System.getProperty("com.ibm.cics.jvmserver.local.ccsid"));
+        String jdeclLocalCcsid = System.getProperty("com.ibm.cics.jvmserver.local.ccsid");
+        byte[] jdeclTempOutputData = jdeclCommareaByteArray;
+        dfhcommarea1.setBytes(new String(jdeclTempOutputData, jdeclCharSet));
+    } else if (wsStatus.equals("error")) {
+        Task.getTask().abend("CUSE");
     }
-    
-    //SF: make this Method available as a CICS program
-    @CICSProgram("LGACJV02")
-    public static void checkFirst() {
-        CaCustomerRequest caCustomerRequest = new CaCustomerRequest();
-        WsResponse wsResponse = new WsResponse();
-
-        wsResponse.setWsResponseCode(0);
-        wsResponse.setWsResponseMessage("");
-        if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("GB")) {
-        }
-        else if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("US")) {
-        }
-        else if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("UK")) {
-        }
-        else if (caCustomerRequest.getCaPostcode().substring(0, 2).equals("DN")) {
-        }
-        else {
-            wsResponse.setWsResponseCode(82);
-            String jdeclVar1 = "Invalid postcode: " + caCustomerRequest.getCaPostcode();
-            wsResponse.setWsResponseMessage(jdeclVar1);
-        }
-
-        // SF: Return response to caller
-        wsResponse.returnWsResponse();
-    }
-
-    
+}
 
     
     public static void main(String[] args) {
-        checkFirst();
+        insertCustomer();
     }
-    
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("}");
         return s.toString();
     }
     
-    public boolean equals(Postchck that) {
+    public boolean equals(Raexport that) {
         return true;
     }
     
     @Override
     public boolean equals(Object that) {
-        return (that instanceof Postchck) && this.equals((Postchck)that);
+        return (that instanceof Raexport) && this.equals((Raexport)that);
     }
     
     @Override
@@ -96,7 +82,7 @@ public class Postchck implements Comparable<Postchck> {
     }
     
     @Override
-    public int compareTo(Postchck that) {
+    public int compareTo(Raexport that) {
         int c = 0;
         return c;
     }
@@ -125,7 +111,7 @@ public class Postchck implements Comparable<Postchck> {
     
     public final String toByteString() {
         try {
-            return new String(getBytes(), factory.getStringEncoding());
+            return new String(getBytes(), factory.getStringEncoding()).stripTrailing();
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -155,4 +141,5 @@ public class Postchck implements Comparable<Postchck> {
     public int numBytes() {
         return SIZE;
     }
+    
 }

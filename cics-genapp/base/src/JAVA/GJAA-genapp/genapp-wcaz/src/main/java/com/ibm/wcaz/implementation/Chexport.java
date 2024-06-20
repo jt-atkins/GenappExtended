@@ -2,31 +2,32 @@ package com.ibm.wcaz.implementation;
 
 import com.ibm.jzos.fields.CobolDatatypeFactory;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
-    public Dfhcommarea1() {}
+public class Chexport implements Comparable<Chexport> {
+    public Chexport() {}
     
-    public Dfhcommarea1(Dfhcommarea1 that) {
+    public Chexport(Chexport that) {
     }
     
-    protected Dfhcommarea1(byte[] bytes, int offset) {
+    protected Chexport(byte[] bytes, int offset) {
         setBytes(bytes, offset);
     }
     
-    protected Dfhcommarea1(byte[] bytes) {
+    protected Chexport(byte[] bytes) {
         this(bytes, 0);
     }
     
-    public static Dfhcommarea1 fromBytes(byte[] bytes, int offset) {
-        return new Dfhcommarea1(bytes, offset);
+    public static Chexport fromBytes(byte[] bytes, int offset) {
+        return new Chexport(bytes, offset);
     }
     
-    public static Dfhcommarea1 fromBytes(byte[] bytes) {
+    public static Chexport fromBytes(byte[] bytes) {
         return fromBytes(bytes, 0);
     }
     
-    public static Dfhcommarea1 fromBytes(String bytes) {
+    public static Chexport fromBytes(String bytes) {
         try {
             return fromBytes(bytes.getBytes(factory.getStringEncoding()));
         } catch (UnsupportedEncodingException e) {
@@ -34,19 +35,42 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
         }
     }
     
+    
+    public static void checkFirstCobol() {
+    CaCustomerRequest caCustomerRequest = new CaCustomerRequest();
+    WsResponse wsResponse = new WsResponse();
+    String caPostcode = caCustomerRequest.getCaPostcode();
+    if (caPostcode.substring(0, 2).toUpperCase().equals("GB")) {
+        // TODO: Empty block may need to be addressed
+    } else if (caPostcode.substring(0, 2).toUpperCase().equals("US")) {
+        // TODO: Empty block may need to be addressed
+    } else if (caPostcode.substring(0, 2).toUpperCase().equals("UK")) {
+        // TODO: Empty block may need to be addressed
+    } else if (caPostcode.substring(0, 2).toUpperCase().equals("DN")) {
+        // TODO: Empty block may need to be addressed
+    } else {
+        wsResponse.setWsResponseCode(Integer.parseInt("82"));
+        wsResponse.setWsResponseMessage("Invalid postcode: " + caPostcode);
+    }
+}
+
+    
+    public static void main(String[] args) {
+        checkFirstCobol();
+    }
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("}");
         return s.toString();
     }
     
-    public boolean equals(Dfhcommarea1 that) {
+    public boolean equals(Chexport that) {
         return true;
     }
     
     @Override
     public boolean equals(Object that) {
-        return (that instanceof Dfhcommarea1) && this.equals((Dfhcommarea1)that);
+        return (that instanceof Chexport) && this.equals((Chexport)that);
     }
     
     @Override
@@ -55,7 +79,7 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
     }
     
     @Override
-    public int compareTo(Dfhcommarea1 that) {
+    public int compareTo(Chexport that) {
         int c = 0;
         return c;
     }
@@ -84,7 +108,7 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
     
     public final String toByteString() {
         try {
-            return new String(getBytes(), factory.getStringEncoding()).trim();
+            return new String(getBytes(), factory.getStringEncoding()).stripTrailing();
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
