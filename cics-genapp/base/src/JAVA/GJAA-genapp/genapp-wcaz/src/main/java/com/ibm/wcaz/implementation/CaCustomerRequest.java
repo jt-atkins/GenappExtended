@@ -5,7 +5,6 @@ import com.ibm.jzos.fields.ExternalDecimalAsIntField;
 import com.ibm.jzos.fields.StringField;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-import com.ibmzpot.common.CobolData
 
 public class CaCustomerRequest extends Dfhcommarea1 {
     private String caFirstName = "";
