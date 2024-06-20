@@ -115,4 +115,5 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
         return SIZE;
     }
     
+    public void reset() {}
 }
