@@ -1,36 +1,36 @@
-package com.ibm.wcaz.implementation;
+package com.ibm.wcaz.impl;
 
 import com.ibm.jzos.fields.CobolDatatypeFactory;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-// SF/
+// SF
 import com.ibm.cics.server.invocation.CICSProgram;
 
-public class Postchck implements Comparable<Postchck> {
-    public Postchck() {}
+public class Rapstchk implements Comparable<Rapstchk> {
+    public Rapstchk() {}
     
-    public Postchck(Postchck that) {
+    public Rapstchk(Rapstchk that) {
     }
     
-    protected Postchck(byte[] bytes, int offset) {
+    protected Rapstchk(byte[] bytes, int offset) {
         setBytes(bytes, offset);
     }
     
-    protected Postchck(byte[] bytes) {
+    protected Rapstchk(byte[] bytes) {
         this(bytes, 0);
     }
     
-    public static Postchck fromBytes(byte[] bytes, int offset) {
-        return new Postchck(bytes, offset);
+    public static Rapstchk fromBytes(byte[] bytes, int offset) {
+        return new Rapstchk(bytes, offset);
     }
     
-    public static Postchck fromBytes(byte[] bytes) {
+    public static Rapstchk fromBytes(byte[] bytes) {
         return fromBytes(bytes, 0);
     }
     
-    public static Postchck fromBytes(String bytes) {
+    public static Rapstchk fromBytes(String bytes) {
         try {
             return fromBytes(bytes.getBytes(factory.getStringEncoding()));
         } catch (UnsupportedEncodingException e) {
@@ -39,12 +39,11 @@ public class Postchck implements Comparable<Postchck> {
     }
     
     
-    public void reset() {
-    }
-    
+    //public static void checkFirstCobol() {}
+
     //SF: make this Method available as a CICS program
-    @CICSProgram("LGACJV02")
-    public static void checkFirst() {
+    @CICSProgram("Rapstchk")
+    public static void checkFirstCobol() {
         CaCustomerRequest caCustomerRequest = new CaCustomerRequest();
         WsResponse wsResponse = new WsResponse();
 
@@ -67,27 +66,23 @@ public class Postchck implements Comparable<Postchck> {
         // SF: Return response to caller
         wsResponse.returnWsResponse();
     }
-
-    
-
     
     public static void main(String[] args) {
-        checkFirst();
+        checkFirstCobol();
     }
-    
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("}");
         return s.toString();
     }
     
-    public boolean equals(Postchck that) {
+    public boolean equals(Rapstchk that) {
         return true;
     }
     
     @Override
     public boolean equals(Object that) {
-        return (that instanceof Postchck) && this.equals((Postchck)that);
+        return (that instanceof Rapstchk) && this.equals((Rapstchk)that);
     }
     
     @Override
@@ -96,7 +91,7 @@ public class Postchck implements Comparable<Postchck> {
     }
     
     @Override
-    public int compareTo(Postchck that) {
+    public int compareTo(Rapstchk that) {
         int c = 0;
         return c;
     }
@@ -125,7 +120,7 @@ public class Postchck implements Comparable<Postchck> {
     
     public final String toByteString() {
         try {
-            return new String(getBytes(), factory.getStringEncoding());
+            return new String(getBytes(), factory.getStringEncoding()).stripTrailing();
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -155,4 +150,5 @@ public class Postchck implements Comparable<Postchck> {
     public int numBytes() {
         return SIZE;
     }
+    
 }

@@ -1,4 +1,4 @@
-package com.ibm.wcaz.implementation;
+package com.ibm.wcaz.impl;
 
 import com.ibm.jzos.fields.CobolDatatypeFactory;
 import java.io.UnsupportedEncodingException;
@@ -33,11 +33,6 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
             throw new RuntimeException(e);
         }
     }
-    
-    
-    public void reset() {
-    }
-    
     
     public String toString() {
         StringBuilder s = new StringBuilder();
@@ -89,7 +84,7 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
     
     public final String toByteString() {
         try {
-            return new String(getBytes(), factory.getStringEncoding());
+            return new String(getBytes(), factory.getStringEncoding()).stripTrailing();
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -119,4 +114,5 @@ public class Dfhcommarea1 implements Comparable<Dfhcommarea1> {
     public int numBytes() {
         return SIZE;
     }
+    
 }
